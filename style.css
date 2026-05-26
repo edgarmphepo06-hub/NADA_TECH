@@ -348,49 +348,74 @@ ul {
   transform: scale(1.05);
 }
 
+/* Nav Menu — Dropdown style on ALL screen sizes */
 .nav-menu {
-  display: flex;
-  align-items: center;
+  position: fixed;
+  top: var(--nav-height);
+  right: 24px;
+  width: 280px;
+  background: rgba(10, 21, 32, 0.97);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  flex-direction: column;
+  padding: 12px;
   gap: 2px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transform: translateY(-12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: calc(100vh - var(--nav-height) - 24px);
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.nav-menu.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Mobile: full-width dropdown */
+@media (max-width: 768px) {
+  .nav-menu {
+    right: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 16px 24px 24px;
+  }
 }
 
 .nav-link {
+  display: block;
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
   font-weight: 500;
-  padding: 8px 18px;
-  border-radius: 50px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
   transition: all var(--transition);
   letter-spacing: 0.2px;
-  position: relative;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: calc(100% - 36px);
-  height: 2px;
-  background: var(--color-accent);
-  border-radius: 2px;
-  transition: transform var(--transition);
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: var(--color-white);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.nav-link.active::before {
-  transform: translateX(-50%) scaleX(1);
+.nav-link.active {
+  color: var(--color-accent);
+  background: rgba(201, 168, 76, 0.1);
 }
 
 /* Hamburger Toggle — Menu Dropdown Button */
 .nav-toggle {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
@@ -1386,47 +1411,9 @@ ul {
 
 /* Tablet */
 @media (max-width: 768px) {
-  .nav-menu {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    background: rgba(10, 21, 32, 0.98);
-    backdrop-filter: blur(24px);
-    flex-direction: column;
-    padding: 16px 24px 24px;
-    gap: 2px;
-    transform: translateY(-110%);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    max-height: calc(100vh - var(--nav-height));
-    overflow-y: auto;
-  }
-
-  .nav-menu.active {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
   .nav-link {
-    width: 100%;
     padding: 14px 18px;
-    font-size: 16px;
-    border-radius: var(--radius-sm);
-  }
-
-  .nav-link::before {
-    display: none;
-  }
-
-  .nav-link.active {
-    background: rgba(201, 168, 76, 0.1);
-    color: var(--color-accent);
-  }
-
-  .nav-toggle {
-    display: flex;
+    font-size: 15px;
   }
 
   .hero-content {
